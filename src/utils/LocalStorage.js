@@ -47,14 +47,11 @@ export default {
   clear() {
     localStorage.clear();
   },
-  showSize() {
+  getSize() {
     let t = 0;
     for(let x in localStorage) {
       t += (((localStorage[x].length * 2)));
     }
-    console.warn(
-      `%cLS size: ${(t/1024).toFixed(3)} kB`,
-      'color: purple'
-    );
+    return `${(t/1024).toFixed(3)} kB`
   }
 }

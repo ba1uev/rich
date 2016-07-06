@@ -18,7 +18,7 @@ export default class App extends Component {
         // body: LS.get(`b_${id}`),
       }
     }
-    LS.showSize();
+    console.warn(`%cInitial LS size: ${LS.getSize()}`, 'color: purple');
   }
 
   initialize() {
