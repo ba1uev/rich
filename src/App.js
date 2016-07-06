@@ -11,10 +11,11 @@ export default class App extends Component {
     if (!LS.get('inited')) {
       this.initialize();
     } else {
-      let id = LS.get('currId')
+      // let id = LS.get('currId')
       this.state = {
-        header: LS.get(`h_${id}`),
-        body: LS.get(`b_${id}`),
+        id: LS.get('id')
+        // header: LS.get(`h_${id}`),
+        // body: LS.get(`b_${id}`),
       }
     }
     LS.showSize();
@@ -22,21 +23,21 @@ export default class App extends Component {
 
   initialize() {
     LS.clear();
-    let currId = LS.set('currId', 1, 'number');
+    let id = LS.set('id', 1, 'number');
     let header = LS.set('h_1', 'Hello world');
     let body = LS.set('b_1', data);
     LS.set('inited', true);
-    this.state = {header, body};
+    // this.state = {header, body};
   }
 
   render() {
-    let {header, body} = this.state;
-    let currId = LS.get('currId');
+    // let {header, body} = this.state;
+    let id = LS.get('id');
     return (
       <div>
         <div className="content">
           <Canvas
-            currId={currId}
+            id={id}
           />
         </div>
       </div>

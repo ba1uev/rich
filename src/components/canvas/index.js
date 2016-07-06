@@ -5,13 +5,14 @@ import LS from '../../utils/LocalStorage';
 export default class Canvas extends Component {
   constructor(props) {
     super(props);
-    let {currId} = props;
+    let {id} = props;
     this.state = {
-      id: currId,
-      header: LS.get(`h_${currId}`),
-      body: LS.get(`b_${currId}`)
+      id: id,
+      header: LS.get(`h_${id}`),
+      body: LS.get(`b_${id}`)
     }
   }
+
   headerChangeHadler() {
     this.setState({
       header: this.refs.noteHeader.value
@@ -19,12 +20,12 @@ export default class Canvas extends Component {
     let {id} = this.state;
     LS.set(`h_${id}`, this.refs.noteHeader.value);
   }
+
   bodyChangedHandler(body) {
-    // if (!this.state) console.log(this.state); return
-    // let {id} = this.state;
-    // LS.set(`b_${id}`, body)
-    console.log(body);
+    let {id} = this.state;
+    LS.set(`b_${id}`, body)
   }
+
   render(){
     let {header, body} = this.state;
     return (
@@ -38,7 +39,7 @@ export default class Canvas extends Component {
         <br/>
         <RichEditor
           noteBody={body}
-          onChange={this.bodyChangedHandler}
+          onChange={(body) => this.bodyChangedHandler(body)}
         />
       </div>
     )
