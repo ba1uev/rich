@@ -25,8 +25,9 @@ export default class RichEditor extends React.Component {
       // console.clear();
       // debugger;
       // console.log('currentContent:');
-      // console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
       this.setState({editorState});
+      let body = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+      this.props.onChange(body);
       // console.log(JSON.stringify(editorState));
     }
 

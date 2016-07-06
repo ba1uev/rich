@@ -47,7 +47,7 @@ export default {
   clear() {
     localStorage.clear();
   },
-  getSize() {
+  showSize() {
     let t = 0;
     for(let x in localStorage) {
       t += (((localStorage[x].length * 2)));

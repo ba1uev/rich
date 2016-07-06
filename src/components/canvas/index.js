@@ -7,16 +7,23 @@ export default class Canvas extends Component {
     super(props);
     let {currId} = props;
     this.state = {
+      id: currId,
       header: LS.get(`h_${currId}`),
       body: LS.get(`b_${currId}`)
     }
   }
   headerChangeHadler() {
-    console.clear();
-    console.log(this.refs.noteHeader.value);
     this.setState({
       header: this.refs.noteHeader.value
     })
+    let {id} = this.state;
+    LS.set(`h_${id}`, this.refs.noteHeader.value);
+  }
+  bodyChangedHandler(body) {
+    // if (!this.state) console.log(this.state); return
+    // let {id} = this.state;
+    // LS.set(`b_${id}`, body)
+    console.log(body);
   }
   render(){
     let {header, body} = this.state;
@@ -28,8 +35,10 @@ export default class Canvas extends Component {
           onChange={() => {this.headerChangeHadler()}}
           ref='noteHeader'
         />
+        <br/>
         <RichEditor
           noteBody={body}
+          onChange={this.bodyChangedHandler}
         />
       </div>
     )
