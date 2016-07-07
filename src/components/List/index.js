@@ -28,7 +28,7 @@ export default class List extends Component {
         <div
           className="list-item"
           key={`header_${id}`}
-          style={{backgroundColor: 'yellow'}}
+          style={{backgroundColor: '#eee', marginBottom: '10px'}}
           onClick={() => this.chooseNote(id)}
         >{header}</div>
       )
