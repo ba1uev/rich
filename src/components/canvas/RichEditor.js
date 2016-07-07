@@ -66,6 +66,12 @@ export default class RichEditor extends React.Component {
     );
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(props.noteBody)))
+    })
+  }
+
   componentDidMount(){
     // console.clear();
     // setTimeout(() => {
