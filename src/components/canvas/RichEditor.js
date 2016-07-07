@@ -15,8 +15,7 @@ export default class RichEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(props.noteBody))),
-      // editorState: EditorState.createEmpty()
+      editorState: props.body ? EditorState.createWithContent(convertFromRaw(JSON.parse(props.body))) : EditorState.createEmpty()
     };
 
     this.focus = () => this.refs.editor.focus();
@@ -68,7 +67,7 @@ export default class RichEditor extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(props.noteBody)))
+      editorState: props.body ? EditorState.createWithContent(convertFromRaw(JSON.parse(props.body))) : EditorState.createEmpty()
     })
   }
 

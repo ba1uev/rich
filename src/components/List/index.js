@@ -11,10 +11,6 @@ export default class List extends Component {
     this.createNote = this.createNote.bind(this);
   }
 
-  componentWillReceiveProps() {
-    // console.log('new props in LIST');
-  }
-
   chooseNote(id){
     this.props.chooseNoteAction(id);
   }

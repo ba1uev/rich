@@ -16,7 +16,7 @@ export default class App extends Component {
       this.state = {
         id: LS.get('id'),
         // FIXME -------------------
-        list: LS.get('list').map(i => {return parseInt(i)})
+        list: LS.get('list', 'array').map(i => {return parseInt(i)})
         // -------------------------
         // header: LS.get(`h_${id}`),
         // body: LS.get(`b_${id}`),
@@ -41,8 +41,7 @@ export default class App extends Component {
       id: 1,
       list: [1, 2, 3]
     }
-    // LS.set('inited', true);
-    // this.state = {header, body};
+    LS.set('inited', true);
   }
 
   chooseNoteAction(id) {
@@ -53,7 +52,6 @@ export default class App extends Component {
   }
 
   createNoteAction() {
-    console.log('create');
     let list = LS.get('list', 'array');
     // FIXME LS < recursive check type -----
     list = list.map(item => parseInt(item));

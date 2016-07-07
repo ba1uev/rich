@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RichEditor from './RichEditor';
+import Draft, { convertToRaw, convertFromRaw, convertFromHTML} from 'draft-js';
 import LS from '../../utils/LocalStorage';
 
 export default class Canvas extends Component {
@@ -13,10 +14,6 @@ export default class Canvas extends Component {
     }
   }
 
-  componentWillReceiveProps(a, b) {
-    // console.log('new props in CANVAS', a, b);
-  }
-
   headerChangeHadler() {
     this.setState({
       header: this.refs.noteHeader.value
@@ -26,17 +23,14 @@ export default class Canvas extends Component {
   }
 
   bodyChangedHandler(body) {
-    // console.log(body);
     let {id} = this.props;
     LS.set(`b_${id}`, body)
   }
 
   render(){
-    // let {header, body} = this.state;
     let {id} = this.props;
-    let header = LS.get(`h_${id}`);
-    let body = LS.get(`b_${id}`);
-    console.log(id,body);
+    let header = LS.get(`h_${id}`) || '';
+    let body = LS.get(`b_${id}`) || false;
     return (
       <div>
         <input
@@ -48,7 +42,7 @@ export default class Canvas extends Component {
         <br/>
         <br/>
         <RichEditor
-          noteBody={body}
+          body={body}
           onChange={(body) => this.bodyChangedHandler(body)}
         />
       </div>
