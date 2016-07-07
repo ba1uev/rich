@@ -11,6 +11,7 @@ export default {
       case 'array':
         let arr = result.split(',');
         arr = arr.map(i => {
+          if (typeof i !== 'string') return i
           return i.replace(/{{COMMA}}/g, ',')
         })
         return arr
@@ -29,6 +30,7 @@ export default {
         break;
       case 'array':
         localStorage[key] = value.map(i => {
+          if (typeof i !== 'string') return i
           return i.replace(/,/g, '{{COMMA}}')
         });
         break;

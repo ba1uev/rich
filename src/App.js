@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import RichEditor from './components/Editor';
-import Canvas from './components/canvas';
+import Canvas from './components/Canvas';
+import List from './components/List';
 import LS from './utils/LocalStorage';
 let data = '{"entityMap":{},"blocks":[{"key":"c4d0i","text":"Hello","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[]},{"key":"38mrh","text":"some initial text","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":3,"style":"BOLD"}],"entityRanges":[]}]}';
 
@@ -24,6 +25,7 @@ export default class App extends Component {
   initialize() {
     LS.clear();
     let id = LS.set('id', 1, 'number');
+    LS.set('list', [1, 2, 3], 'array');
     let header = LS.set('h_1', 'Hello world');
     let body = LS.set('b_1', data);
     LS.set('inited', true);
@@ -37,6 +39,9 @@ export default class App extends Component {
       <div>
         <div className="content">
           <Canvas
+            id={id}
+          />
+          <List
             id={id}
           />
         </div>
