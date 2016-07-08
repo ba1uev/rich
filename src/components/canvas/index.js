@@ -20,6 +20,7 @@ export default class Canvas extends Component {
     })
     let {id} = this.props;
     LS.set(`h_${id}`, this.refs.noteHeader.value);
+    this.props.headerChangeHadler(this.refs.noteHeader.value)
   }
 
   bodyChangedHandler(body) {
@@ -34,6 +35,7 @@ export default class Canvas extends Component {
     return (
       <div>
         <input
+          className='editor-header'
           type='text'
           value={header}
           onChange={() => {this.headerChangeHadler()}}

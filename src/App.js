@@ -12,19 +12,30 @@ export default class App extends Component {
     if (!LS.get('inited')) {
       this.initialize();
     } else {
-      // let id = LS.get('currId')
+      let id = LS.get('id')
       this.state = {
-        id: LS.get('id'),
-        // FIXME -------------------
-        list: LS.get('list', 'array').map(i => {return parseInt(i)})
+        id: id,
+        // FIXME ------------------- !!
+        list: LS.get('list', 'array').map(id => {return parseInt(id)}),
         // -------------------------
-        // header: LS.get(`h_${id}`),
-        // body: LS.get(`b_${id}`),
+        // headers: this.getHeaders(),
+        // TODO make single state property headerMap: [{id: 666, header: 'Hello'},{},..]
+        notesMap: this.getNotesMap()
       }
     }
     this.createNoteAction = this.createNoteAction.bind(this);
     this.chooseNoteAction = this.chooseNoteAction.bind(this);
-    console.warn(`%cInitial LS size: ${LS.getSize()}`, 'color: purple');
+    // this.getHeaders = this.getHeaders.bind(this);
+    this.getNotesMap = this.getNotesMap.bind(this);
+    // console.warn(`%cInitial LS size: ${LS.getSize()}`, 'color: purple');
+  }
+
+  // getHeaders(){
+  //   return LS.get('list', 'array').map(id => {return LS.get(`h_${id}`)});
+  // }
+
+  getNotesMap() {
+    return LS.get('list', 'array').map(id => {return {id, header: LS.get(`h_${id}`)}})
   }
 
   initialize() {
@@ -39,9 +50,11 @@ export default class App extends Component {
     LS.set('b_3', data);
     this.state = {
       id: 1,
-      list: [1, 2, 3]
+      list: [1, 2, 3],
+      // headers: this.getHeaders(),
+      notesMap: this.getNotesMap()
     }
-    LS.set('inited', true);
+    // LS.set('inited', true);
   }
 
   chooseNoteAction(id) {
@@ -51,9 +64,18 @@ export default class App extends Component {
     })
   }
 
+  headerChangeHadler(title) {
+    // console.log(title);
+    let id = LS.get('id');
+    //  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TODO  changed header binding
+    // this.setState({
+    //   notesMap: this.getN
+    // })
+  }
+
   createNoteAction() {
     let list = LS.get('list', 'array');
-    // FIXME LS < recursive check type -----
+    // FIXME LS < recursive check type ----- !!
     list = list.map(item => parseInt(item));
     // -------------------------------------
     let newId = Math.max(...list) + 1;
@@ -64,28 +86,29 @@ export default class App extends Component {
     LS.set('id', newId, 'number');
     this.setState({
       id: newId,
-      list: list
-    })
+      list: list,
+      // headers: this.getHeaders()
+      notesMap: this.getNotesMap()
+    });
+    document.querySelector('.editor-header').focus();
   }
 
   render() {
-    let {id, list} = this.state;
-    // //FIXME -----------------------------------
-    // let id = LS.get('id', 'number');
-    // let list = LS.get('list', 'array').map(i => {return parseInt(i)});
-    // //-----------------------------------------
+    let {id, list, notesMap} = this.state;
     return (
       <div>
         <div className="content">
           <List
             id={id}
             list={list}
+            notesMap={notesMap}
             chooseNoteAction={this.chooseNoteAction}
             createNoteAction={this.createNoteAction}
           />
           <br/>
           <Canvas
             id={id}
+            headerChangeHadler={this.headerChangeHadler}
           />
         </div>
       </div>

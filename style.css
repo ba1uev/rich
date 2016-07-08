@@ -6,3 +6,7 @@
   width: 700px;
   margin: 60px auto;
 }
+
+.list-item {
+  min-height: 14px;
+}

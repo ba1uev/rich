@@ -20,10 +20,10 @@ export default class List extends Component {
   }
 
   render() {
+    // console.log(this.props.notesMap);
     let list = [];
-    let wow ='wow';
-    LS.get('list', 'array').forEach(id => {
-      let header = LS.get(`h_${id}`);
+    this.props.list.forEach(id => {
+      let header = LS.get(`h_${id}`) || '';
       list.push(
         <div
           className="list-item"
@@ -32,7 +32,7 @@ export default class List extends Component {
           onClick={() => this.chooseNote(id)}
         >{header}</div>
       )
-    });
+    })
     return (
       <div className="list" style={{backgroundColor: '#fff'}}>
         {list}
