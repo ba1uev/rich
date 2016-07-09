@@ -20,17 +20,16 @@ export default class List extends Component {
   }
 
   render() {
-    // console.log(this.props.notesMap);
-    let list = [];
-    this.props.list.forEach(id => {
-      let header = LS.get(`h_${id}`) || '';
-      list.push(
+    let list = this.props.notesMap.map(note => {
+      return (
         <div
           className="list-item"
-          key={`header_${id}`}
+          key={note.id}
           style={{backgroundColor: '#eee', marginBottom: '10px'}}
-          onClick={() => this.chooseNote(id)}
-        >{header}</div>
+          onClick={() => this.chooseNote(note.id)}
+        >
+          {note.header}
+        </div>
       )
     })
     return (

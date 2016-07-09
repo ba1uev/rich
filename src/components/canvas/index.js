@@ -6,11 +6,8 @@ import LS from '../../utils/LocalStorage';
 export default class Canvas extends Component {
   constructor(props) {
     super(props);
-    // let {id} = props;
     this.state = {
-      // id: id,
-      // header: LS.get(`h_${id}`),
-      body: 'LS.get(`b_${id}`)'
+      header: ''
     }
   }
 
@@ -34,6 +31,12 @@ export default class Canvas extends Component {
     let body = LS.get(`b_${id}`) || false;
     return (
       <div>
+        <button
+          onClick={() => {this.props.deleteNoteHandler(id)}}
+        >
+          Delete note
+        </button>
+        <br/>
         <input
           className='editor-header'
           type='text'

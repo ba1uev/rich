@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import RichEditor from './components/Editor';
 import Canvas from './components/Canvas';
 import List from './components/List';
 import LS from './utils/LocalStorage';
@@ -18,21 +17,16 @@ export default class App extends Component {
         // FIXME ------------------- !!
         list: LS.get('list', 'array').map(id => {return parseInt(id)}),
         // -------------------------
-        // headers: this.getHeaders(),
-        // TODO make single state property headerMap: [{id: 666, header: 'Hello'},{},..]
         notesMap: this.getNotesMap()
       }
     }
     this.createNoteAction = this.createNoteAction.bind(this);
     this.chooseNoteAction = this.chooseNoteAction.bind(this);
-    // this.getHeaders = this.getHeaders.bind(this);
     this.getNotesMap = this.getNotesMap.bind(this);
-    // console.warn(`%cInitial LS size: ${LS.getSize()}`, 'color: purple');
+    this.headerChangeHadler = this.headerChangeHadler.bind(this);
+    this.deleteNoteHandler = this.deleteNoteHandler.bind(this);
+    console.warn(`%cInitial LS size: ${LS.getSize()}`, 'color: purple');
   }
-
-  // getHeaders(){
-  //   return LS.get('list', 'array').map(id => {return LS.get(`h_${id}`)});
-  // }
 
   getNotesMap() {
     return LS.get('list', 'array').map(id => {return {id, header: LS.get(`h_${id}`)}})
@@ -51,10 +45,9 @@ export default class App extends Component {
     this.state = {
       id: 1,
       list: [1, 2, 3],
-      // headers: this.getHeaders(),
       notesMap: this.getNotesMap()
     }
-    // LS.set('inited', true);
+    LS.set('inited', true);
   }
 
   chooseNoteAction(id) {
@@ -64,13 +57,16 @@ export default class App extends Component {
     })
   }
 
-  headerChangeHadler(title) {
-    // console.log(title);
-    let id = LS.get('id');
-    //  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TODO  changed header binding
-    // this.setState({
-    //   notesMap: this.getN
-    // })
+  headerChangeHadler(header) {
+    let {id} = this.state;
+    let notesMap = this.getNotesMap().map(note => {
+      if (note.id == id) {
+        note.header = header;
+        return note
+      }
+      return note
+    })
+    this.setState({notesMap});
   }
 
   createNoteAction() {
@@ -87,10 +83,34 @@ export default class App extends Component {
     this.setState({
       id: newId,
       list: list,
-      // headers: this.getHeaders()
       notesMap: this.getNotesMap()
     });
     document.querySelector('.editor-header').focus();
+  }
+
+  deleteNoteHandler(id) {
+    let header = LS.get(`h_${id}`);
+    if (confirm(`Are you sure to remove note "${header}"?`)) {
+      let notesMap = this.getNotesMap();
+      let removeNoteIndex;
+      notesMap.forEach((note, index) => {
+        if (note.id == id) removeNoteIndex = index;
+      });
+      notesMap.splice(removeNoteIndex, 1);
+      let {list} = this.state;
+      let removeIndex = list.indexOf(id);
+      if (removeIndex != -1) {
+        list.splice(removeIndex, 1);
+      } else {
+        console.error('Delete note ERROR: Note index not found.')
+      }
+      let nextId = Math.max(...list);
+      LS.set('list', list, 'array');
+      LS.set('id', nextId, 'number');
+      LS.remove(`h_${id}`);
+      LS.remove(`b_${id}`);
+      this.setState({notesMap, id: nextId});
+    }
   }
 
   render() {
@@ -109,6 +129,7 @@ export default class App extends Component {
           <Canvas
             id={id}
             headerChangeHadler={this.headerChangeHadler}
+            deleteNoteHandler={this.deleteNoteHandler}
           />
         </div>
       </div>
