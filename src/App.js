@@ -87,7 +87,7 @@ export default class App extends Component {
       list: list,
       notesMap: this.getNotesMap()
     });
-    document.querySelector('.editor-header').focus();
+    document.querySelector('.header').focus();
   }
 
   deleteNoteHandler(id) {
@@ -100,7 +100,6 @@ export default class App extends Component {
       });
       notesMap.splice(removeNoteIndex, 1);
       let {list} = this.state;
-      // let removeIndex = list.indexOf(id);
       let removeIndex;
       list.forEach((listId, index) => {
         if (listId == id) removeIndex = index;

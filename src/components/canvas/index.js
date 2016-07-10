@@ -30,26 +30,27 @@ export default class Canvas extends Component {
     let header = LS.get(`h_${id}`) || '';
     let body = LS.get(`b_${id}`) || false;
     return (
-      <div>
-        <button
-          onClick={() => {this.props.deleteNoteHandler(id)}}
-        >
-          Delete note
-        </button>
-        <br/>
+      <div className="canvas">
         <input
-          className='editor-header'
+          className='header'
           type='text'
           value={header}
+          placeholder={!header ? 'New note' : null}
           onChange={() => {this.headerChangeHadler()}}
           ref='noteHeader'
         />
-        <br/>
-        <br/>
-        <RichEditor
-          body={body}
-          onChange={(body) => this.bodyChangedHandler(body)}
-        />
+        <div className='body'>
+          <RichEditor
+            body={body}
+            onChange={(body) => this.bodyChangedHandler(body)}
+          />
+        </div>
+        <button
+          onClick={() => {this.props.deleteNoteHandler(id)}}
+          className='act'
+        >
+          Delete note
+        </button>
       </div>
     )
   }

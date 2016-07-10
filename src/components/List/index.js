@@ -20,22 +20,24 @@ export default class List extends Component {
   }
 
   render() {
+    let {id} = this.props;
     let list = this.props.notesMap.map(note => {
+      let isActive = note.id == id;
+      let header = note.header ? note.header : 'No name';
       return (
         <div
-          className="list-item"
+          className={isActive ? 'list-item active' : 'list-item'}
           key={note.id}
-          style={{backgroundColor: '#eee', marginBottom: '10px'}}
           onClick={() => this.chooseNote(note.id)}
         >
-          {note.header}
+          {header}
         </div>
       )
     })
     return (
       <div className="list" style={{backgroundColor: '#fff'}}>
         {list}
-        <button className="list-new" onClick={this.createNote}>New note</button>
+        <button className="act list-new" onClick={this.createNote}>New note</button>
       </div>
     )
   }

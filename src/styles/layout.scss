@@ -1,0 +1,95 @@
+$bg: #fff;
+$alt: #000;
+$alt_lighter: rgba($alt, 0.03);
+$list-item: #939393;
+$list-item_active: #000;
+$header-placeholder: #ddd;
+
+body {
+  margin: 0;
+  font-family: 'helvetica';
+  background: $bg;
+}
+
+button.act {
+  border: 2px solid $alt;
+  background: none;
+  color: $alt;
+  font-weight: 600;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background: $alt;
+    color: #fff;
+  }
+}
+
+.canvas {
+  width: 600px;
+  margin: 60px auto;
+  position: relative;
+  &-delete {
+    width: 16px;
+    height: 16px;
+    position: relative;;
+    top: 34px;
+    right: 0;
+    cursor: pointer;
+    path {
+      fill: $list-item;
+    }
+    &:hover {
+      path {
+        fill: $list-item_active;
+      }
+    }
+  }
+  .header {
+    width: 100%;
+    height: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    margin-bottom: 30px;
+    &:focus {
+      outline: none;
+    }
+    ::-webkit-input-placeholder {color: $header-placeholder;}
+    ::-moz-placeholder          {color: $header-placeholder;}
+    :-moz-placeholder           {color: $header-placeholder;}
+    :-ms-input-placeholder      {color: $header-placeholder;}
+  }
+  .body {
+    margin-bottom: 20px;
+  }
+}
+
+.list {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  width: 200px;
+  height: 300px;
+  margin: auto;
+  padding: 10px;
+  text-align: right;
+  &-item {
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border-right: 2px solid $bg;
+    color: $list-item;
+    &.active {
+      border-color: $alt;
+      color: $list-item_active;
+    }
+  }
+  &-new {
+    margin-top: 20px;
+  }
+}
