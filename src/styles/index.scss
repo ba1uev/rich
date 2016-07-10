@@ -1,5 +1,14 @@
-$bg: #dadada;
+$bg: #92ccbe;
 
 body {
   background: $bg;
+}
+
+.content {
+  width: 700px;
+  margin: 60px auto;
+}
+
+.list-item {
+  min-height: 14px;
 }

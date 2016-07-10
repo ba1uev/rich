@@ -100,12 +100,12 @@ export default class App extends Component {
       });
       notesMap.splice(removeNoteIndex, 1);
       let {list} = this.state;
-      let removeIndex = list.indexOf(id);
-      if (removeIndex != -1) {
-        list.splice(removeIndex, 1);
-      } else {
-        console.error('Delete note ERROR: Note index not found.')
-      }
+      // let removeIndex = list.indexOf(id);
+      let removeIndex;
+      list.forEach((listId, index) => {
+        if (listId == id) removeIndex = index;
+      })
+      list.splice(removeIndex, 1);
       let nextId = Math.max(...list);
       LS.set('list', list, 'array');
       LS.set('id', nextId, 'number');
