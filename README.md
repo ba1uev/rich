@@ -7,6 +7,6 @@ Multipage editor width local browser storage.
 
 ```
 $ npm install
-$ npm start
+$ npm run start
 > http://localhost:3000
 ```

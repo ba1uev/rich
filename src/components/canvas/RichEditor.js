@@ -97,7 +97,7 @@ export default class RichEditor extends React.Component {
 
     return (
       <div className="RichEditor-root">
-        <Sticky stickyStyle={}>
+        <Sticky stickyStyle={stickyStyle}>
           <BlockStyleControls
             editorState={editorState}
             onToggle={this.toggleBlockType}
