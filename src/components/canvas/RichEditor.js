@@ -72,11 +72,7 @@ export default class RichEditor extends React.Component {
   }
 
   componentDidMount(){
-    // console.clear();
-    // setTimeout(() => {
-    //   this.setState({editorState: JSON.parse(data)});
-    // }, 3000)
-    this.focus()
+    // this.focus()
   }
 
   render() {
@@ -110,7 +106,7 @@ export default class RichEditor extends React.Component {
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            placeholder="Tell a story..."
+            placeholder="Write your note"
             ref="editor"
             spellCheck={false}
           />
@@ -120,20 +116,19 @@ export default class RichEditor extends React.Component {
   }
 }
 
-// Custom overrides for "code" style.
+//Custom overrides for "code" style.
 const styleMap = {
   CODE: {
-    backgroundColor: 'rgba(255, 0, 0, 0.31)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    padding: 2,
-    color: 'orange'
+    padding: 2
   },
-  BOLD: {
-    color: 'red',
-    fontWeight: 900,
-    backgroundColor: 'pink'
-  }
+  // BOLD: {
+  //   color: 'red',
+  //   fontWeight: 900,
+  //   backgroundColor: 'pink'
+  // }
 };
 
 function getBlockStyle(block) {

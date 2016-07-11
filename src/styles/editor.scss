@@ -9,6 +9,7 @@
   cursor: text;
   font-size: 16px;
   margin-top: 10px;
+  min-height: 400px;
 }
 
 .RichEditor-editor .public-DraftEditorPlaceholder-root,
@@ -41,9 +42,9 @@
   padding: 20px;
 }
 
-.RichEditor-header-one {
-  color: orange;
-}
+// .RichEditor-header-one {
+//   color: orange;
+// }
 
 .RichEditor-controls {
   font-family: 'Helvetica', sans-serif;

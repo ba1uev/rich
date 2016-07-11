@@ -11,7 +11,16 @@ export default class Canvas extends Component {
     }
   }
 
-  headerChangeHadler() {
+  keyDownHandler(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault;
+      console.log('enter');
+      document.querySelector('.body').focus()
+    }
+  }
+
+  headerChangeHadler(e) {
+    console.log(e.keyCode);
     this.setState({
       header: this.refs.noteHeader.value
     })
@@ -35,8 +44,9 @@ export default class Canvas extends Component {
           className='header'
           type='text'
           value={header}
-          placeholder={!header ? 'New note' : null}
-          onChange={() => {this.headerChangeHadler()}}
+          placeholder={!header ? 'Name your note' : null}
+          onKeyDown={this.keyDownHandler}
+          onChange={(e) => {this.headerChangeHadler(e)}}
           ref='noteHeader'
         />
         <div className='body'>
