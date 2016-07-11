@@ -44,11 +44,11 @@
   "dependencies": {
     "css-loader": "^0.23.1",
     "draft-js": "^0.7.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "immutable": "^3.8.1",
     "node-sass": "^3.8.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-sticky": "^5.0.4",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack-simple-server": "^0.2.0"

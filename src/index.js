@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { StickyContainer } from 'react-sticky';
 
 console.error = (function() {
   var error = console.error
@@ -11,4 +12,9 @@ console.error = (function() {
   }
 })()
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  (<StickyContainer>
+    <App />
+  </StickyContainer>),
+  document.getElementById('root')
+);

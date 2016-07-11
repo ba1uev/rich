@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Immutable from 'immutable';
 import Draft, { convertToRaw, convertFromRaw } from 'draft-js';
+import { Sticky } from 'react-sticky';
 
 const {
   Editor,
@@ -88,16 +89,24 @@ export default class RichEditor extends React.Component {
       }
     }
 
+    let stickyStyle = {
+      backgroundColor: '#fff',
+      borderBottom: '1px solid gray',
+      zIndex: 2
+    };
+
     return (
       <div className="RichEditor-root">
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
+        <Sticky stickyStyle={}>
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={this.toggleBlockType}
+          />
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
+        </Sticky>
         <div className={className} onClick={this.focus}>
           <Editor
             blockStyleFn={getBlockStyle}
