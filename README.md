@@ -8,5 +8,5 @@ Multipage editor with local browser storage.
 ```
 $ npm install
 $ npm run start
-> http://localhost:1337
+> http://localhost:3000
 ```
