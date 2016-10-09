@@ -4,11 +4,15 @@ $alt_lighter: rgba($alt, 0.03);
 $list-item: #939393;
 $list-item_active: #000;
 $header-placeholder: #ddd;
+$selection: rgba(255, 199, 0, 0.45);
 
 body {
   margin: 0;
   font-family: 'helvetica';
   background: $bg;
+  ::selection {
+    background: $selection;
+  }
 }
 
 button.act {
